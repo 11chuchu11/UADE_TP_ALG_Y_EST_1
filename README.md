@@ -1,6 +1,7 @@
 # UADE_TP_ALG_Y_EST_1
 
-Proyecto integrador para la materia Algoritmos y Estructuras de Datos I
+Proyecto integrador para la materia Algoritmos y Estructuras de Datos I.
+Tema: Sistema de gestion de turnos
 
 ## Integrantes
 - Acuña Tobias 1199802
