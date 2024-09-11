@@ -1,17 +1,17 @@
-from app.utils import obtenerConformidadYEstado
+from app.utils import obtenerConformidadYEstado, ingresoDato
 from app.validar_alumno import validarAlumno
 def busquedaPorAlumno(liCodOp, liNomOp, liLegajos, liNombres, liEmail, liOperaciones, liPuestosAtencion, liConformidad, liEConsulta):
     mensajesConformidad = ["Inconforme", "Regular", "Conforme"]
     mensajesEstado = ["No Solucionado", "En Revisión", "Solucionado"]
     
     mensaje="Ingrese el legajo, nombre y apellido o email de un alumno"
-    ingreso = input(f"{mensaje}: ").lower()
+    ingreso = ingresoDato(f"{mensaje}: ")
     
     ocurrencias = []
     validarAlumno(ingreso, liLegajos, liNombres, liEmail, ocurrencias)
         
     while not len(ocurrencias):
-        ingreso = input(f"ERROR: {mensaje} existente: ").lower()
+        ingreso = ingresoDato(f"ERROR: {mensaje} existente: ")
         validarAlumno(ingreso, liLegajos, liNombres, liEmail, ocurrencias)
         
     print("CANT. TRAMITES\t% SOLUCIONADOS\tCANT. SOLUCIONADOS\t% EN REVISION\tCANT. EN REVISION\t% NO SOLUCIONADOS\tCANT. NO SOLUCIONADOS")
