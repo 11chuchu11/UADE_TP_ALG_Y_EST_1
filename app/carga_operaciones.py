@@ -1,4 +1,4 @@
-from app.utils import ingresoDatoInt
+from app.utils import ingresoDatoInt, ingresoDato
 
 def cargaOperaciones(listaCod, listaNom, cantidadOperaciones):
     
@@ -14,12 +14,12 @@ def cargaOperaciones(listaCod, listaNom, cantidadOperaciones):
         
         listaCod.append(numOp)
         
-        nombreOp = input(mensajeNom)
-        nombreOp = nombreOp.lower()
+        nombreOp = ingresoDato(mensajeNom)
+        
         
         liNomNormalizada = [nombre.lower() for nombre in listaNom]
         while nombreOp in liNomNormalizada:
-            nombreOp = input(f"ERROR: Operacion ya ingresada, {mensajeNom.lower()}").lower()
+            nombreOp = ingresoDato(f"ERROR: Operacion ya ingresada, {mensajeNom.lower()}")
         
         listaNom.append(nombreOp)
         

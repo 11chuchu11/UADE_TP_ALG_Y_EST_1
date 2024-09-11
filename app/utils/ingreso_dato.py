@@ -16,3 +16,5 @@ def ingresoDatoInt(minimo, maximo, mensajeIngreso):
         valor = int(ingreso)
     
     return valor
+
+ingresoDato = lambda mensaje : input(mensaje).lower()

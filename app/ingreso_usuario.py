@@ -1,4 +1,4 @@
-from app.utils import validarNombre,validarEmail
+from app.utils import validarNombre,validarEmail, ingresoDato
 
 def ingresoUsuario(legajo,liLegajos, liNombre,liEmail):
     
@@ -10,20 +10,20 @@ def ingresoUsuario(legajo,liLegajos, liNombre,liEmail):
     else:
         
         mensajeNombre = "Indique su nombre y apellido: "
-        nombre = input(mensajeNombre)
+        nombre = ingresoDato(mensajeNombre)
         nombreValido = validarNombre(nombre)
         while (not nombreValido):
-            nombre = input(f"ERROR: Ingrese un nombre real: ")
+            nombre = ingresoDato(f"ERROR: Ingrese un nombre real: ")
             nombreValido = validarNombre(nombre)
             
         liNombre.append(nombre)
         
         
         mensajeEmail = "Indique su email: "
-        email = input(mensajeEmail)
+        email = ingresoDato(mensajeEmail)
         emailValido = validarEmail(email)
         while(not emailValido):
-            email = input(f"ERROR: Ingrese un formato de email correcto: ")
+            email = ingresoDato(f"ERROR: Ingrese un formato de email correcto: ")
             emailValido = validarEmail(email)
         
         liEmail.append(email)

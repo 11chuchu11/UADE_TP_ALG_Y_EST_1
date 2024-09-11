@@ -3,7 +3,7 @@ def buscarMejorValoracion(liConformidad:list[list[int]]):
     i = 0
 
 
-    while mejorValoracion != 3 or i < len(liConformidad):
+    while mejorValoracion != 3 and i < len(liConformidad):
         fila = liConformidad[i]
         
         for index, columna in enumerate(fila):
@@ -20,7 +20,8 @@ def buscarPeorValoracion(liConformidad):
     peorValoracion = -1
     i = 0
 
-    while peorValoracion != 1 or i <len(liConformidad):
+    while peorValoracion != 1 and i <len(liConformidad):
+        print("MIRAAAA ACAAA: ", i, liConformidad)
         fila = liConformidad[i]
         
         for index, columna in enumerate(fila):

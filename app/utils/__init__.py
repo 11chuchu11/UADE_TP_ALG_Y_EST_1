@@ -1,4 +1,4 @@
-from app.utils.ingreso_dato import ingresoDatoInt
+from app.utils.ingreso_dato import ingresoDatoInt, ingresoDato
 from app.utils.contar_cantidades import contarCantidadesLista
 from app.utils.mostrar_tabla_operaciones import mostrarTablaOperaciones
 from app.utils.validaciones_regex import validarEmail, validarNombre
