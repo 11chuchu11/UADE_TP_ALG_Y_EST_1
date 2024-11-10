@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "codigo": 100,
+        "nombre": "baja de materias"
+    },
+    {
+        "id": 2,
+        "codigo": 200,
+        "nombre": "becas y ayudas economicas"
+    },
+    {
+        "id": 3,
+        "codigo": 300,
+        "nombre": "intercambios estudiantiles"
+    },
+    {
+        "id": 4,
+        "codigo": 400,
+        "nombre": "inscripciones"
+    },
+    {
+        "id": 5,
+        "codigo": 500,
+        "nombre": "otros"
+    }
+]

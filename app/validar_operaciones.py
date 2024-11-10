@@ -1,12 +1,19 @@
-def validarOperaciones(op, liCod,liNom):
-    liNomNormalizada = [nom.lower() for nom in liNom]
-    indiceOp = -1
+from app.utils import busquedaOBJ
+
+
+def validarOperaciones(op, liOps):
+    idOP = -1
     
-    if op.isdigit():
-        if int(op) in liCod:
-            indiceOp = liCod.index(int(op))
-    else:
-        if op.lower() in liNomNormalizada:
-            indiceOp = liNomNormalizada.index(op.lower())
-    
-    return indiceOp
+    try:
+        codigoOP = int(op)
+        indiceOp = busquedaOBJ(liOps, 'codigo', codigoOP)
+        
+        if indiceOp != -1:
+            idOP = liOps[indiceOp]['id']
+            
+    except:
+        indiceOp = busquedaOBJ(liOps, 'nombre', op)
+        if indiceOp != -1:
+            idOP = liOps[indiceOp]['id']
+            
+    return idOP

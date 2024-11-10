@@ -1,31 +1,48 @@
-from app.utils import validarNombre,validarEmail, ingresoDato
+from app.utils import validarNombre,validarEmail, ingresoDato,busquedaOBJ
 
-def ingresoUsuario(legajo,liLegajos, liNombre,liEmail):
+
+def ingresoUsuario(legajo, liAlumnos):
     
-    if legajo in liLegajos:
-        indiceLegajo = liLegajos.index(legajo)
-        liNombre.append(liNombre[indiceLegajo])
-        liEmail.append(liEmail[indiceLegajo])
+
+    alumno = {
+        'id': liAlumnos[len(liAlumnos)-1]['id']+1 if len(liAlumnos)  else 1,
+        'legajo': legajo
+    }
+    
+    indiceAlumno = busquedaOBJ(liAlumnos,'legajo',legajo)
+    
+    if indiceAlumno != -1:
+        alumno = liAlumnos[indiceAlumno]
     
     else:
-        
-        mensajeNombre = "Indique su nombre y apellido: "
+        mensajeNombre = "Indique su nombre: "
         nombre = ingresoDato(mensajeNombre)
         nombreValido = validarNombre(nombre)
+        
         while (not nombreValido):
             nombre = ingresoDato(f"ERROR: Ingrese un nombre real: ")
             nombreValido = validarNombre(nombre)
             
-        liNombre.append(nombre)
+        mensajeApellido = "Indique su apellido: "
+        apellido = ingresoDato(mensajeApellido)
+        apellidoValido = validarNombre(apellido)
         
-        
+        while (not apellidoValido):
+            apellido = ingresoDato(f"ERROR: Ingrese un apellido real: ")
+            apellidoValido = validarNombre(apellido)
+            
         mensajeEmail = "Indique su email: "
         email = ingresoDato(mensajeEmail)
         emailValido = validarEmail(email)
+        
         while(not emailValido):
             email = ingresoDato(f"ERROR: Ingrese un formato de email correcto: ")
             emailValido = validarEmail(email)
         
-        liEmail.append(email)
+        alumno['nombre'] = nombre
+        alumno['apellido'] = apellido
+        alumno['email'] = email
         
-    liLegajos.append(legajo)
+        liAlumnos.append(alumno)
+        
+    return alumno

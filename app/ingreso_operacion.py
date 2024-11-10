@@ -1,15 +1,15 @@
 from app.utils import mostrarTablaOperaciones, ingresoDato
 from app.validar_operaciones import validarOperaciones
-def ingresoOperacion(liCodOp,liNomOp, liOperaciones):
+def ingresoOperacion(liOps):
     mensajeOperacion = 'Elija una operacion: '
-    mostrarTablaOperaciones(liCodOp,liNomOp)
+    mostrarTablaOperaciones(liOps)
     operacion = ingresoDato(mensajeOperacion)
         
-    indiceOperacionSeleccionada = validarOperaciones(operacion, liCodOp, liNomOp)
+    idOperacionSeleccionada = validarOperaciones(operacion, liOps)
         
-    while indiceOperacionSeleccionada == -1:
-        mostrarTablaOperaciones(liCodOp, liNomOp)
+    while idOperacionSeleccionada == -1:
+        mostrarTablaOperaciones(liOps)        
         operacion = ingresoDato(f"ERROR: Elija una operacion disponible: ")
-        indiceOperacionSeleccionada = validarOperaciones(operacion, liCodOp, liNomOp)
+        idOperacionSeleccionada = validarOperaciones(operacion, liOps)
         
-    liOperaciones.append(indiceOperacionSeleccionada)
+    return idOperacionSeleccionada

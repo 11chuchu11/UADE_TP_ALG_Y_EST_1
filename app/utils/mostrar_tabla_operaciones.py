@@ -1,4 +1,4 @@
-def mostrarTablaOperaciones(liCod, liNom):
+def mostrarTablaOperaciones(liOps):
     print("CODIGO OPERACION\tNOMBRE OPERACION")
-    for i, cod in enumerate(liCod):
-        print(f"{cod}{' '*16}\t{liNom[i]}")
+    for op in liOps:
+        print(f"{op['codigo']}{' '*16}\t{op['nombre'].capitalize()}")

@@ -1,33 +1,34 @@
 from random import randint
-from app.utils import ingresoDatoInt
+from app.utils import ingresoDatoInt, horaRandom
 from app.ingreso_usuario import ingresoUsuario
 from app.ingreso_operacion import ingresoOperacion
-from app.ingreso_conformidad_estado import ingresoConformidadYEstado
+from datetime import datetime
 
-def cargaTurnos(liCodOp=[], liNomOp=[], liLegajos=[], liNombres=[], liEmails=[], liOperaciones=[], liPuestosAtencion=[], liConformidad=[], liEConsulta=[]):    
-    mensajeLegajo = 'Ingrese un numero de legajo entre 11000 y 11999, 12000 para terminar: '
-    print()
-    legajo = ingresoDatoInt(11000,12000, mensajeLegajo)
-    id = 0
+def cargaTurnos(liOps, liAlumnos, liTurnos ):    
+    
+    fecha = datetime.now()
+    mensajeConformidad = "Del 1 al 3 que tan conforme esta con la atencion, siendo 1 inconforme, 2 regular y 3 conforme: "
+    mensajeEstado = 'Siendo 1 No solucionado, 2 en revisión y 3 Solucionado cual es el estado de su consulta: '
+    legajo = ingresoDatoInt(11000,12000, 'Ingrese un numero de legajo entre 11000 y 11999, 12000 para terminar: ')
     
     while legajo != 12000:
         
-        ingresoUsuario(legajo,liLegajos,liNombres,liEmails)
+        turno = {'id': liTurnos[-1]['id']+1 if len(liTurnos) else 1 }
+        usuario = ingresoUsuario(legajo, liAlumnos)
         
-        ingresoOperacion(liCodOp, liNomOp, liOperaciones)
-        
+        turno['idAlumno'] = usuario['id']
+        idOperacion = ingresoOperacion(liOps)
         puestoAtencion = randint(1,5)
         print('Dirijase al puesto ', puestoAtencion)
-        liPuestosAtencion.append(puestoAtencion)
+        turno['puestoAtencion'] = puestoAtencion
+
+        turno['conformidad'] = ingresoDatoInt(1,3, mensajeConformidad)
+        turno['estado'] = ingresoDatoInt(1,3, mensajeEstado)
+        turno['idOperacion'] = idOperacion
+        turno['fecha'] = str(datetime.date(fecha))
+        turno['hora'] = horaRandom(9,18)
         
-        mensajeConformidad = "Del 1 al 3 que tan conforme esta con la atencion, siendo 1 inconforme, 2 regular y 3 conforme: "
+        liTurnos.append(turno)
+        legajo = ingresoDatoInt(11000, 12000, 'Ingrese un numero de legajo entre 11000 y 11999, 12000 para terminar: ')
         
-        ingresoConformidadYEstado(id,liConformidad,mensajeConformidad)
-        
-        mensajeEstado = 'Siendo 1 No solucionado, 2 en revisión y 3 Solucionado cual es el estado de su consulta: '
-        
-        ingresoConformidadYEstado(id, liEConsulta, mensajeEstado )
-        
-        id += 1
-        legajo = ingresoDatoInt(11000, 12000, mensajeLegajo)
         

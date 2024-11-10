@@ -1,18 +1,23 @@
-from app.utils import contarCantidadesLista, calcularPorcentaje, obtenerConformidadYEstado
-def informeGeneral(liCodOp=[], liNomOp=[], liLegajos=[], liNombres=[], liOperaciones=[], liPuestosAtencion=[], liConformidad=[], liEConsulta=[]):
-    cantidadTramites = len(liLegajos)
+from app.utils import contarCantidadesListas, calcularPorcentaje, obtenerConformidadYEstado, busquedaOBJ
+def informeGeneral(liOp, liAlumnos, liTurnos):
+    cantidadTramites = len(liTurnos)
     
-    liCantidadesConformidad = [0]*3
-    liCantidadesEstado = [0]*3
+
     
-    contarCantidadesLista(1,3,liConformidad, liCantidadesConformidad)
-    contarCantidadesLista(1,3,liEConsulta, liCantidadesEstado)    
+    cantidades = {
+        'conformidad':[0]*3,
+        'estado':[0]*3
+    }
     
-    liPorcentajesConformidad = []
-    liPorcentajesEstado = []
+    contarCantidadesListas(liTurnos, cantidades) 
     
-    calcularPorcentaje(cantidadTramites, liCantidadesConformidad, liPorcentajesConformidad)
-    calcularPorcentaje(cantidadTramites, liCantidadesEstado, liPorcentajesEstado)
+    porcentajes = {
+        'conformidad':[0]*3,
+        'estado':[0]*3
+    }
+    
+    calcularPorcentaje(cantidadTramites, cantidades, porcentajes)
+    
     
     mensajesConformidad = ["Inconforme", "Regular", "Conforme"]
     mensajesEstado = ["No Solucionado", "En Revisión", "Solucionado"]
@@ -22,16 +27,22 @@ def informeGeneral(liCodOp=[], liNomOp=[], liLegajos=[], liNombres=[], liOperaci
     print("-"*155)
     
     print("CANT. TRAMITES\t% SOLUCIONADOS\tCANT. SOLUCIONADOS\t% EN REVISION\tCANT. EN REVISION\t% NO SOLUCIONADOS\tCANT. NO SOLUCIONADOS")
-    print("%14d\t%14d\t%18d\t%13d\t%17d\t%17d\t%21d" % (cantidadTramites, liPorcentajesEstado[2], liCantidadesEstado[2], liPorcentajesEstado[1], liCantidadesEstado[1], liPorcentajesEstado[0], liCantidadesEstado[0]))
+    print("%14d\t%14d\t%18d\t%13d\t%17d\t%17d\t%21d" % (cantidadTramites, porcentajes["estado"][2], cantidades["estado"][2], porcentajes['estado'][1], cantidades['estado'][1], porcentajes['estado'][0], cantidades['estado'][0]))
     print("%14s\t%14s\t%18s\t%13s\t%17s\t%17s\t%21s" % ("CANT. TRAMITES","% CONFORMES","CANT. CONFORMES","% REGULAR","CANT. REGULAR","% INCONFORMES","CANT. INCONFORMES"))        
-    print("%14d\t%14d\t%18d\t%13d\t%17d\t%17d\t%21d" % (cantidadTramites, liPorcentajesConformidad[2], liCantidadesConformidad[2], liPorcentajesConformidad[1], liCantidadesConformidad[1], liPorcentajesConformidad[0], liCantidadesConformidad[0]))
+    print("%14d\t%14d\t%18d\t%13d\t%17d\t%17d\t%21d" % (cantidadTramites, porcentajes['conformidad'][2], cantidades['conformidad'][2], porcentajes['conformidad'][1], cantidades['conformidad'][1], porcentajes['conformidad'][0], cantidades['conformidad'][0]))
     print()
     print(
         "%14s\t%20s\t%18s\t%13s\t%17s\t%17s\t%25s"
         %
         ("LEGAJO", "NOMBRE","P. ATENCION","CONFORMIDAD","ESTADO", "COD. OPERACION", "OPERACION"))
-    for i in range(len(liLegajos)):
-        op = liOperaciones[i]
-        mensajeConf = obtenerConformidadYEstado(i,liConformidad, mensajesConformidad)
-        mensajeEst = obtenerConformidadYEstado(i, liEConsulta, mensajesEstado)
-        print("%14d\t%20s\t%18d\t%13s\t%17s\t%17d\t%25s" % (liLegajos[i], liNombres[i].title(),liPuestosAtencion[i], mensajeConf, mensajeEst, liCodOp[op], liNomOp[op].title()) )
+    
+    for turno in liTurnos:
+        
+        alumno = liAlumnos[busquedaOBJ(liAlumnos, 'id', turno['idAlumno'])]
+        legajo = alumno['legajo']
+        nombreApellido = f'{alumno['nombre']} {alumno['apellido']}'.title()
+        puestoAtencion = turno['puestoAtencion']
+        
+        
+        op = liOp[busquedaOBJ(liOp, 'id', turno['idOperacion'])]
+        print("%14d\t%20s\t%18d\t%13s\t%17s\t%17d\t%25s" % (legajo, nombreApellido, puestoAtencion, mensajesConformidad[turno['conformidad']-1], mensajesEstado[turno['estado']-1], op['codigo'], op['nombre'].title()) )

@@ -1,20 +1,25 @@
+from app.utils.validaciones_regex import validarEntero
 from app.utils.validar_rango import validarRango
 def ingresoDatoInt(minimo, maximo, mensajeIngreso):
-    ingreso=input(mensajeIngreso)
-    
-    while(not ingreso.isdigit()):
-        ingreso = input("ERROR: Ingrese un tipo de dato numerico: ")
+    try:
         
-    valor = int(ingreso)
-    
-    while validarRango(valor, minimo, maximo) == 0:
-        ingreso = input('ERROR ' + mensajeIngreso)
+        ingreso=input(mensajeIngreso)
 
-        while (not ingreso.isdigit()):
+        while(not validarEntero(ingreso)):
             ingreso = input("ERROR: Ingrese un tipo de dato numerico: ")
-            
+
         valor = int(ingreso)
+
+        while validarRango(valor, minimo, maximo) == 0:
+            ingreso = input('ERROR ' + mensajeIngreso)
+
+            while (not validarEntero(ingreso)):
+                ingreso = input("ERROR: Ingrese un tipo de dato numerico: ")
+
+            valor = int(ingreso)
+        return valor
+    except: 
+        print('Ocurrio un error al ingresar el numero entero')
     
-    return valor
 
 ingresoDato = lambda mensaje : input(mensaje).lower()
