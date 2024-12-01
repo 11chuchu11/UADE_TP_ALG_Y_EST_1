@@ -11,8 +11,8 @@ def main():
     turnos = []
     
     cargaOperaciones(ops, 5)
-    #cargaTurnos(ops, alumnos, turnos)
-    cargaTurnosAutomatica(300,ops, alumnos, turnos,100)
+    cargaTurnos(ops, alumnos, turnos)
+    #cargaTurnosAutomatica(300,ops, alumnos, turnos,100)
     generarInformes(ops, alumnos, turnos)
     
 

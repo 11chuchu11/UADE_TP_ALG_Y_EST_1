@@ -1,5 +1,4 @@
 from app.utils import validarNombre,validarEmail, ingresoDato,busquedaOBJ
-from faker import Faker
 
 
 def ingresoUsuario(legajo, liAlumnos):
@@ -49,6 +48,7 @@ def ingresoUsuario(legajo, liAlumnos):
 
 
 def ingresoUsuarioAutomatico(legajo, liAlumnos):
+    from faker import Faker
 
     fake = Faker("es_ES")
 
