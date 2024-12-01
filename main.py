@@ -1,5 +1,5 @@
 from app.carga_operaciones import cargaOperaciones
-from app.carga_turnos import cargaTurnos
+from app.carga_turnos import cargaTurnos,cargaTurnosAutomatica
 from app.generar_informes import generarInformes
 
 
@@ -11,7 +11,8 @@ def main():
     turnos = []
     
     cargaOperaciones(ops, 5)
-    cargaTurnos(ops, alumnos, turnos)
+    #cargaTurnos(ops, alumnos, turnos)
+    cargaTurnosAutomatica(300,ops, alumnos, turnos,100)
     generarInformes(ops, alumnos, turnos)
     
 

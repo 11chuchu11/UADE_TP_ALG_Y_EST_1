@@ -1,4 +1,4 @@
-from app.utils import contarCantidadesListas, calcularPorcentaje, obtenerConformidadYEstado, busquedaOBJ
+from app.utils import contarCantidadesListas, calcularPorcentaje, busquedaOBJ
 def informeGeneral(liOp, liAlumnos, liTurnos):
     cantidadTramites = len(liTurnos)
     
@@ -40,7 +40,7 @@ def informeGeneral(liOp, liAlumnos, liTurnos):
         
         alumno = liAlumnos[busquedaOBJ(liAlumnos, 'id', turno['idAlumno'])]
         legajo = alumno['legajo']
-        nombreApellido = f'{alumno['nombre']} {alumno['apellido']}'.title()
+        nombreApellido = f'{alumno["nombre"]} {alumno["apellido"]}'.title()
         puestoAtencion = turno['puestoAtencion']
         
         

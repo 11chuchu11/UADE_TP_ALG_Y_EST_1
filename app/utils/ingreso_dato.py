@@ -1,5 +1,6 @@
 from app.utils.validaciones_regex import validarEntero
 from app.utils.validar_rango import validarRango
+from random import randint
 def ingresoDatoInt(minimo, maximo, mensajeIngreso):
     try:
         
@@ -20,6 +21,14 @@ def ingresoDatoInt(minimo, maximo, mensajeIngreso):
         return valor
     except: 
         print('Ocurrio un error al ingresar el numero entero')
-    
+
 
 ingresoDato = lambda mensaje : input(mensaje).lower()
+
+
+def ingresoDatoIntAutomatico(minimo, maximo, mensajeIngreso):
+    dato = randint(minimo, maximo)
+    
+    print(f"{mensajeIngreso} {dato}")
+    
+    return dato

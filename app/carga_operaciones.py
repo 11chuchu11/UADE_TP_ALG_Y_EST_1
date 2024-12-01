@@ -1,4 +1,4 @@
-from app.utils import ingresoDatoInt, ingresoDato,cargaJSON, busquedaOBJ, generarJson
+from app.utils import ingresoDatoInt, ingresoDato, cargaJSON, generarJson, busquedaOBJ
 
 def cargaOperacionesManual(ops,cantidadOperaciones):
     mensajeCod = "Ingrese un codigo de operacion entre 100 y 999: "
